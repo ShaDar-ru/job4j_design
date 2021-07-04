@@ -5,5 +5,5 @@ package ru.job4j.generics;
  * @version 1.0
  * @date 04.07.2021
  */
-public class Predator extends Animal{
+public class Predator extends Animal {
 }

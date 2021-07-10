@@ -5,7 +5,7 @@ package ru.job4j.generics;
  * @version 1.0
  * @date 08.07.2021
  */
-public class User extends Base{
+public class User extends Base {
 
     public User(String id) {
         super(id);

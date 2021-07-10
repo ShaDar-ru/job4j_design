@@ -31,7 +31,7 @@ public class SimpleArray<T> implements Iterable<T> {
 
     public void remove(int index) {
         int removeInd = Objects.checkIndex(index, point);
-        System.arraycopy(models, removeInd, models, removeInd, models.length-removeInd);
+        System.arraycopy(models, removeInd + 1, models, removeInd, models.length - removeInd - 1);
         point--;
     }
 

@@ -96,9 +96,9 @@ public class SimpleArrayTest {
         ints.add(1);
         ints.add(2);
         ints.add(3);
-        ints.remove(2);
+        ints.remove(1);
         assertThat(ints.get(0), is(1));
-        assertThat(ints.get(1), is(2));
+        assertThat(ints.get(1), is(3));
         ints.add(14);
         assertThat(ints.get(2), is(14));
     }

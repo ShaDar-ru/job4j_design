@@ -12,14 +12,14 @@ import java.util.List;
  */
 public class GenericsUsage {
     public void printRsl(Collection<?> col) {
-        for (Iterator<?> it = col.iterator(); it.hasNext(); ) {
+        for (Iterator<?> it = col.iterator(); it.hasNext();) {
             Object next = it.next();
             System.out.println("Текущий элемент: " + next);
         }
     }
 
     public void printInfo(Collection<? extends Person> col) {
-        for (Iterator<? extends Person> it = col.iterator(); it.hasNext(); ) {
+        for (Iterator<? extends Person> it = col.iterator(); it.hasNext();) {
             Person next = it.next();
             System.out.println(next);
         }

@@ -1,6 +1,5 @@
 package ru.job4j.collection;
 
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -65,7 +64,6 @@ public class SimpleArrayTest {
         array.remove(1);
         Iterator<String> it = array.iterator();
         assertThat(it.next(), is("first"));
-        assertNull(it.next());
         assertThat(it.next(), is("third"));
     }
 
@@ -76,6 +74,7 @@ public class SimpleArrayTest {
         array.add("second");
         array.add("third");
         assertThat(array.remove("second"), is(true));
+        assertThat(array.get(1), is("third"));
     }
 
     @Test
@@ -97,5 +96,15 @@ public class SimpleArrayTest {
         assertThat(array.size(), is(2));
         array.add("third");
         assertThat(array.size(), is(3));
+    }
+
+    @Test
+    public void whenAddAndRemoveElem() {
+        SimpleArray<String> array = new SimpleArray<>();
+        array.add("first");
+        array.add("second");
+        assertThat(array.remove("second"), is(true));
+        array.add("third");
+        assertThat(array.get(1), is("third"));
     }
 }

@@ -34,12 +34,18 @@ public class SimpleArray<T> implements Iterable<T> {
     public void remove(int index) {
         Objects.checkIndex(index, models.length);
         models[index] = null;
+        modCount++;
+        System.arraycopy(models, index + 1, models, index, models.length - index - 1);
+        point--;
     }
 
     public boolean remove(T model) {
         for (int i = 0; i < models.length; i++) {
             if (models[i] == model) {
                 models[i] = null;
+                modCount++;
+                System.arraycopy(models, i + 1, models, i, models.length - i - 1);
+                point--;
                 return true;
             }
         }

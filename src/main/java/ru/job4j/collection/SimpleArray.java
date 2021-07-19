@@ -16,7 +16,7 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public T get(int index) {
-        Objects.checkIndex(index, models.length);
+        Objects.checkIndex(index, point);
         return models[index];
     }
 
@@ -26,13 +26,13 @@ public class SimpleArray<T> implements Iterable<T> {
             this.models = (T[]) new Object[1];
         }
         if (point == models.length) {
-            models = Arrays.copyOf(models, (int) (models.length * 1.5 > 2 ? models.length * 1.5 : 2));
+            models = Arrays.copyOf(models, (models.length * 2));
         }
         models[point++] = model;
     }
 
     public void remove(int index) {
-        Objects.checkIndex(index, models.length);
+        Objects.checkIndex(index, point);
         models[index] = null;
         modCount++;
         System.arraycopy(models, index + 1, models, index, models.length - index - 1);
@@ -42,10 +42,7 @@ public class SimpleArray<T> implements Iterable<T> {
     public boolean remove(T model) {
         for (int i = 0; i < models.length; i++) {
             if (models[i] == model) {
-                models[i] = null;
-                modCount++;
-                System.arraycopy(models, i + 1, models, i, models.length - i - 1);
-                point--;
+                remove(i);
                 return true;
             }
         }
@@ -53,7 +50,7 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public int size() {
-        return models.length;
+        return point;
     }
 
     @Override

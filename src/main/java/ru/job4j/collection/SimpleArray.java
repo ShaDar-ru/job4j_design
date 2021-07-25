@@ -41,7 +41,7 @@ public class SimpleArray<T> implements Iterable<T> {
 
     public boolean remove(T model) {
         for (int i = 0; i < models.length; i++) {
-            if (models[i] == model) {
+            if (models[i].equals(model)) {
                 remove(i);
                 return true;
             }

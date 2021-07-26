@@ -20,6 +20,7 @@ public class SimpleLinkedList<E> implements List<E> {
             last = first;
         } else {
             l.next = newNode;
+            last = newNode;
         }
         point++;
         modCount++;

@@ -31,4 +31,20 @@ public class SimpleStackTest {
         stack.pop();
         assertThat(stack.pop(), is(1));
     }
+
+    @Test
+    public void whenAddOneSizeIsOne() {
+        SimpleStack<Integer> stack = new SimpleStack<>();
+        stack.push(0);
+        assertThat(stack.size(), is(1));
+    }
+
+    @Test
+    public void whenAddTwoAndDeleteOneSize() {
+        SimpleStack<Integer> stack = new SimpleStack<>();
+        stack.push(0);
+        stack.push(1);
+        stack.pop();
+        assertThat(stack.size(), is(1));
+    }
 }

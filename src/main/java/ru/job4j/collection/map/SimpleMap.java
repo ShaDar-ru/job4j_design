@@ -42,7 +42,10 @@ public class SimpleMap<K, V> implements Map<K, V> {
     public V get(K key) {
         int hashSearched = hash(key.hashCode());
         int indexFor = indexFor(hashSearched);
-        return table[indexFor] != null ? table[indexFor].getValue() : null;
+        if (table[indexFor] == null || !table[indexFor].getKey().equals(key)) {
+            return null;
+        }
+        return table[indexFor].getValue();
     }
 
     @Override
@@ -50,6 +53,9 @@ public class SimpleMap<K, V> implements Map<K, V> {
         int hashSearched = hash(key.hashCode());
         int indexFor = indexFor(hashSearched);
         if (table[indexFor] == null) {
+            return false;
+        }
+        if (!table[indexFor].getKey().equals(key)) {
             return false;
         }
         table[indexFor(hashSearched)] = null;
@@ -104,9 +110,11 @@ public class SimpleMap<K, V> implements Map<K, V> {
         capacity *= 2;
         MapEntry<K, V>[] temp = new MapEntry[capacity];
         for (int i = 0; i < capacity / 2; i++) {
-            int hashCode = table[i].getKey().hashCode();
-            int indexNew = indexFor(hash(hashCode));
-            temp[indexNew] = table[i];
+            if (table[i] != null) {
+                int hashCode = table[i].getKey().hashCode();
+                int indexNew = indexFor(hash(hashCode));
+                temp[indexNew] = table[i];
+            }
         }
         table = temp;
     }

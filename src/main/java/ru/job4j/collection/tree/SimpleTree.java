@@ -3,6 +3,7 @@ package ru.job4j.collection.tree;
 import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Queue;
+import java.util.function.Predicate;
 
 public class SimpleTree<E> implements Tree<E> {
     private final Node<E> root;
@@ -14,19 +15,24 @@ public class SimpleTree<E> implements Tree<E> {
     @Override
     public boolean add(E parent, E child) {
         if (this.findBy(parent).isPresent() && this.findBy(child).isEmpty()) {
-            root.children.add(new Node<>(child));
+            if (parent.equals(root)) {
+                root.children.add(new Node<>(child));
+            } else {
+                this.findBy(parent).get().children.add(new Node<>(child));
+            }
+
             return true;
         }
         return false;
     }
 
     @Override
-    public Optional<Node<E>> findBy(E value) {
-        Optional<Node<E>> rsl = Optional.empty();
-        Queue<Node<E>> data = new LinkedList<>();
+    public Optional<Tree.Node<E>> findBy(E value) {
+        Optional<Tree.Node<E>> rsl = Optional.empty();
+        Queue<Tree.Node<E>> data = new LinkedList<>();
         data.offer(this.root);
         while (!data.isEmpty()) {
-            Node<E> el = data.poll();
+            Tree.Node<E> el = data.poll();
             if (el.value.equals(value)) {
                 rsl = Optional.of(el);
                 break;

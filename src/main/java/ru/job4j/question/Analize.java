@@ -7,33 +7,22 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 public class Analize {
-    private static int analize(Map<Integer, String> map, Predicate<Integer> predicate) {
-        int rsl = 0;
-        Iterator<Integer> it = map.keySet().iterator();
-        while (it.hasNext()) {
-            Integer i = it.next();
-            if (!predicate.test(i)) {
-                rsl++;
-                it.remove();
-            }
-        }
-        return rsl;
-    }
-
-    private static Map<Integer, String> convertToMap(Set<User> users) {
-        Map<Integer, String> rsl = new HashMap<>();
-        for (User u : users) {
-            rsl.put(u.getId(), u.getName());
-        }
-        return rsl;
-    }
 
     public static Info diff(Set<User> previous, Set<User> current) {
-        Map<Integer, String> prev = convertToMap(previous);
-        Map<Integer, String> curr = convertToMap(current);
-        int added = analize(curr, prev::containsKey);
-        int deleted = analize(prev, curr::containsKey);
-        int changed = analize(curr, (x) -> prev.get(x).equals(curr.get(x)));
-        return new Info(added, changed, deleted);
+        Info info = new Info(0, 0, 0);
+        Map<Integer, String> prev = new HashMap<>();
+        previous.forEach(x -> prev.put(x.getId(), x.getName()));
+        for (User u : current) {
+            var curr = prev.remove(u.getId());
+            if (curr == null) {
+                info.setAdded(info.getAdded() + 1);
+            } else {
+                if (!curr.equals(u.getName())) {
+                    info.setChanged(info.getChanged() + 1);
+                }
+            }
+        }
+        info.setDeleted(prev.size());
+        return info;
     }
 }

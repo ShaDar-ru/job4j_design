@@ -37,7 +37,6 @@ public class AnalizyTest {
         analizy.unavailable(source.getAbsolutePath(), result.getAbsolutePath());
         StringBuilder stbl = new StringBuilder();
         try (BufferedReader in = new BufferedReader(new FileReader(result))) {
-            AtomicInteger count = new AtomicInteger();
             in.lines().forEach(x -> {
                 if (stbl.length() != 0 && stbl.length() % 2 == 0) {
                     stbl.append(System.lineSeparator());

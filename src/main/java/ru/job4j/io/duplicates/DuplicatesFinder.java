@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 public class DuplicatesFinder {
     private Path root;
-    private Map<String, String> duplicates = new HashMap<>();
+    private Map<FileProperty, String> duplicates = new HashMap<>();
 
 
     public DuplicatesFinder(String[] args) {
@@ -38,6 +38,7 @@ public class DuplicatesFinder {
                 .append(" :")
                 .append(System.lineSeparator())
                 .append(v)
+                .append(System.lineSeparator())
                 .append(System.lineSeparator()));
         return rsl.toString();
     }

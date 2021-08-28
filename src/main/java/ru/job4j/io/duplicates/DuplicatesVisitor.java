@@ -10,16 +10,25 @@ import java.util.Map;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     private static Map<FileProperty, String> storage = new HashMap<>();
-    private static Map<String, String> duplicates = new HashMap<>();
+    private static Map<FileProperty, String> duplicates = new HashMap<>();
 
     private static void setDuplicate(Path file) {
         FileProperty fp = new FileProperty(file.toFile().length(), file.getFileName().toString());
-        StringBuilder rsl = new StringBuilder(storage.get(fp));
-        rsl.append(" & ").append(file.toAbsolutePath().toString());
-        duplicates.put(fp.getName(), rsl.toString());
+        StringBuilder rsl = new StringBuilder();
+        if (duplicates.containsKey(fp)) {
+            rsl.append(duplicates.get(fp))
+                    .append(System.lineSeparator())
+                    .append(file.toAbsolutePath().toString());
+            duplicates.put(fp, rsl.toString());
+        } else {
+            rsl.append(storage.get(fp))
+                    .append(System.lineSeparator())
+                    .append(file.toAbsolutePath().toString());
+            duplicates.put(fp, rsl.toString());
+        }
     }
 
-    public static Map<String, String> getDuplicates() {
+    public static Map<FileProperty, String> getDuplicates() {
         return duplicates;
     }
 

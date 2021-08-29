@@ -33,10 +33,11 @@ public class Config {
     }
 
     public String value(String key) {
-        if (values.containsKey(key) && values.get(key) != null) {
-            return values.get(key);
+        if (!values.containsKey(key) || values.get(key) == null) {
+            throw new IllegalArgumentException("Invalid data");
+
         }
-        throw new IllegalArgumentException("Invalid data");
+        return values.get(key);
     }
 
     @Override

@@ -23,7 +23,8 @@ public class Analizy {
         StringBuilder stbl = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(source))) {
             reader.lines().forEach(x -> {
-                if (x.contains("400") || x.contains("500")) {
+                if ((stbl.length() == 0 || stbl.charAt(stbl.length() - 1) != ';')
+                        && (x.contains("400") || x.contains("500"))) {
                     String[] strings = x.split(" ");
                     stbl.append(strings[1] + ";");
                 }

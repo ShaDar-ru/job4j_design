@@ -18,9 +18,15 @@ public class DuplicatesFinder {
     }
 
     private void getPath(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException("Arguments is null");
+        }
         Stream.of(args)
                 .findFirst()
                 .ifPresent(x -> root = Paths.get(x));
+        if (!root.toFile().isDirectory()) {
+            throw new IllegalArgumentException(String.format("Not directory %s", root.toAbsolutePath().toString()));
+        }
     }
 
     private void findDuplicates() throws IOException {

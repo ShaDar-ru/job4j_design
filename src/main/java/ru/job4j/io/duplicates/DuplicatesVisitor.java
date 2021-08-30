@@ -16,16 +16,13 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
         FileProperty fp = new FileProperty(file.toFile().length(), file.getFileName().toString());
         StringBuilder rsl = new StringBuilder();
         if (duplicates.containsKey(fp)) {
-            rsl.append(duplicates.get(fp))
-                    .append(System.lineSeparator())
-                    .append(file.toAbsolutePath().toString());
-            duplicates.put(fp, rsl.toString());
+            rsl.append(duplicates.get(fp));
         } else {
-            rsl.append(storage.get(fp))
-                    .append(System.lineSeparator())
-                    .append(file.toAbsolutePath().toString());
-            duplicates.put(fp, rsl.toString());
+            rsl.append(storage.get(fp));
         }
+        rsl.append(System.lineSeparator())
+                .append(file.toAbsolutePath().toString());
+        duplicates.put(fp, rsl.toString());
     }
 
     public static Map<FileProperty, String> getDuplicates() {

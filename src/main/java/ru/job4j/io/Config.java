@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.StringJoiner;
 
 /**
@@ -21,12 +22,20 @@ public class Config {
 
     public void load() {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
-            read.lines().forEach(x -> {
-                if (!x.contains("#") && x.contains("=")) {
-                    String[] strings = x.split("=");
-                    values.put(strings[0], strings[1]);
+            String s = read.readLine();
+            while (s != null) {
+                if (!s.contains("#") && s.contains("=")) {
+                    String[] str = s.split("=");
+                    if (str.length != 2) {
+                        throw new IllegalArgumentException("Invalid data");
+                    }
+                    if (values.get(str[0]) != null) {
+                        throw new IllegalArgumentException("Invalid data. Duplicated keys");
+                    }
+                    values.put(str[0], str[1]);
                 }
-            });
+                s = read.readLine();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

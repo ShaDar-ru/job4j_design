@@ -30,6 +30,7 @@ public class ConsoleChat {
         while (run) {
             String userStr = readLine();
             log.add("User: " + userStr + System.lineSeparator());
+            userStr = userStr.trim();
             if (userStr.equals(OUT)) {
                 close();
                 answer = false;

@@ -47,7 +47,7 @@ public class TrainPath {
         for (String s : returnedStr) {
             stbl.append(s);
         }
-        stbl.append(tab).append("</stations>").append(sl).append("</train_path");
+        stbl.append(tab).append("</stations>").append(sl).append("</train_path>");
         return stbl.toString();
     }
 

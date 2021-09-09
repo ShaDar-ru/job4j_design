@@ -14,7 +14,16 @@ public class UsageLog4j {
 
     public static void main(String[] args) {
         String name = "Alex";
+        char symbol = 'c';
+        byte type = 1;
+        short number = 2;
         int age = 31;
-        LOG.debug("User info name : {}, age : {}", name, age);
+        long key = 1L;
+        double id = 1.0;
+        float score = 2.0f;
+        boolean bl = true;
+
+        LOG.debug("User info name : {}, age : {}, symbol : {}, type : {}, number : {}, key : {}, id : {}, "
+                        + "userScore : {}, admin : {}", name, age, symbol, type, number, key, id, score, bl);
     }
 }

@@ -18,6 +18,18 @@ public class Train {
         this.fuelConsumption = fuelConsumption;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public double getFuelConsumption() {
+        return fuelConsumption;
+    }
+
     @Override
     public String toString() {
         return "Train{"

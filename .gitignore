@@ -1,6 +1,6 @@
 *.iml
 target
 .idea
-src/main/java/ru/job4j/Test.java
+src/main/java/ru/job4j/test/*.java
 src/main/java/ru/job4j/iterator/FlatIt.java
 src/test/java/ru/job4j/iterator/FlatItTest.java

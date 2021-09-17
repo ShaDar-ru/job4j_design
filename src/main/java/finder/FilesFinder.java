@@ -42,6 +42,7 @@ public class FilesFinder {
         name = validateInput("n", "name");
         mask = validateInput("t", "name or mask or regex");
         validateNameTypeParam();
+        getMaskType();
         out = validateInput("o", "file to output");
         validateOutPutFile();
     }
@@ -78,6 +79,9 @@ public class FilesFinder {
         if (!(mask.equals("mask") || mask.equals("name") || mask.equals("regex"))) {
             throw new IllegalArgumentException("Parameter \"-t\" must be: \"name\" or \"mask\" or \"regex\"");
         }
+    }
+
+    private void getMaskType() {
         if (mask.equals("mask") || mask.equals("regex")) {
             maskOrRegex = true;
         }

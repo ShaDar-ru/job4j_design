@@ -1,0 +1,1 @@
+update users set cash = 500.50;

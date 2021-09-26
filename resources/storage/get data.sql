@@ -1,6 +1,5 @@
 select * from gearbox left outer join car on gearbox.id = car.gearbox_id
-where gearbox.id = 3;
-select * from gearbox left outer join car on gearbox.id = car.gearbox_id
-where gearbox.id = 4;
+where car.gearbox_id isnull;
+
 select * from body left outer join car on body.id = car.body_id
-where body.id = 3;
+where car.body_id isnull;
